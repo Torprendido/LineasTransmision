@@ -100,6 +100,18 @@ public class LineasTransmision {
 
         }
     }
+    
+    static double xlFormula() {
+        return 2*Math.PI*frec*lFormula();
+    }
+    
+    static double xcFormula() {
+        return 1/Math.PI*frec*canFormula();
+    }
+    
+    static double ycFormula() {
+        return Math.PI*frec*canFormula();
+    }
 
     static void imprime() {
         for (int i = 0; i < 100; i++) {
