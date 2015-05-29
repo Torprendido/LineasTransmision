@@ -15,7 +15,7 @@ public class LineasTransmision {
 
     static int opc;
     static double dec[] = new double[100];
-    static double d, w, v, lL, frec, dTA, ds, fP, r;
+    static double d, w, v, lL, frec, dTA, ds, fP, r, R;
     static int linea, noCond;
     static double pi = 3.141592;
     static Scanner scan = new Scanner(System.in);
@@ -88,21 +88,19 @@ public class LineasTransmision {
     }
 
     static double lFormula() {
-        double l = (2.0E-34) * log((dmgFormula() / dsbFormula()));
+        double l = (2.0E-7) * log((dmgFormula() / dsbFormula()));
         return l;
     }
 
     static double canFormula() {
-        double numerador, denominador, res = 0;
-        r = (d / 2) / (1000);
+        double mult, raiz, division, res = 0;
+        r = (dTA / 2) / 1000;
         if (linea == 2) {
-            numerador = 0.0242;
-            denominador = log(dmgFormula() / sqrt((r) * (d)));
-            res = numerador / denominador;
+            res = 0.0242 / log(dmgFormula() / (sqrt(d * r)));
         } else if (linea == 3) {
-
+            res = 0.0242 / log(dmgFormula() / pow(r * (d * d), 1.0 / 3.0));
         } else if (linea == 4) {
-
+            res = 1.09 * (pow(r * (d * d * d), 1.0 / 4.0));
         }
         return res;
     }
@@ -121,157 +119,188 @@ public class LineasTransmision {
             case 1:
                 dTA = 0;
                 ds = 0.0198;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 2:
                 dTA = 16.31;
                 ds = 0.0217;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.2569;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 3:
                 dTA = 17.27;
                 ds = 0.0229;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1247;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 4:
                 dTA = 0;
                 ds = 0.0222;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.2057;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 5:
                 dTA = 18.31;
                 ds = 0.0243;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.2034;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 6:
                 dTA = 18.82;
                 ds = 0.0255;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.2021;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 7:
                 dTA = 0;
                 ds = 0.0241;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1742;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 8:
                 dTA = 19.89;
                 ds = 0.0264;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1726;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 9:
                 dTA = 0;
                 ds = 0.0264;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1453;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 10:
                 dTA = 0;
                 ds = 0.0284;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1444;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 11:
                 dTA = 21.79;
                 ds = 0.0289;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1437;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 12:
                 dTA = 22.43;
                 ds = 0.0304;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1427;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 13:
                 dTA = 0;
                 ds = 0.0284;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1247;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 14:
                 dTA = 0;
                 ds = 0.0306;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.124;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 15:
                 dTA = 23.54;
                 ds = 0.0314;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1237;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 16:
                 dTA = 0;
                 ds = 0.0327;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1083;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 17:
                 dTA = 25.14;
                 ds = 0.0335;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.1079;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 18:
                 dTA = 28.14;
                 ds = 0.0373;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0869;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 19:
                 dTA = 27;
                 ds = 0.0352;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0879;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 20:
                 dTA = 29.59;
                 ds = 0.0386;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0738;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 21:
                 dTA = 30.37;
                 ds = 0.0402;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0732;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 22:
                 dTA = 30.81;
                 ds = 0.0402;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0682;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 23:
                 dTA = 31.98;
                 ds = 0.0415;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0636;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 24:
                 dTA = 32.84;
                 ds = 0.0436;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0633;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 25:
                 dTA = 34.16;
                 ds = 0.0444;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0561;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 26:
                 dTA = 35.1;
                 ds = 0.0466;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0554;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 27:
                 dTA = 36.24;
                 ds = 0.0470;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0502;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 28:
                 dTA = 37.21;
                 ds = 0.0494;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0495;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 29:
                 dTA = 38.15;
                 ds = 0.0498;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0456;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 30:
                 dTA = 39.24;
                 ds = 0.0523;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0449;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             case 31:
                 dTA = 0;
                 ds = 0.0586;
-                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
+                R = 0.0344;
+                System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds + ",\tR = " + R);
                 break;
             default:
                 System.out.println("\n\tNo existe esa opcion!");
