@@ -1,4 +1,3 @@
-
 package lineastransmision;
 
 import static java.lang.Math.log;
@@ -82,19 +81,24 @@ public class LineasTransmision {
     }
 
     static double dsbFormula() {
-        double dsb, opera = ds * dTA;
+        double dsb, opera = 0.0142 * d; //ds
         dsb = sqrt(opera);
         return dsb;
     }
 
-    static float lFormula() {
-        float l;
-        l = (float) (pow(20, -7) * log((dmgFormula() / dsbFormula())));
+    static double lFormula() {
+        double l = (2.0E-34) * log((dmgFormula() / dsbFormula()));
         return l;
     }
 
-    static void tipoLinea() {
+    static void canFormula() {
+        if (linea == 2) {
 
+        } else if (linea == 3) {
+
+        } else if (linea == 4) {
+
+        }
     }
 
     static void imprime() {
@@ -115,7 +119,6 @@ public class LineasTransmision {
                 break;
             case 2:
                 dTA = 16.31;
-
                 ds = 0.0217;
                 System.out.println("Diametro aproximado = " + dTA + ",\tDs = " + ds);
                 break;
