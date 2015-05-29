@@ -15,7 +15,7 @@ public class LineasTransmision {
 
     static int opc;
     static double dec[] = new double[100];
-    static double d, w, v, lL, frec, dTA, ds, fP;
+    static double d, w, v, lL, frec, dTA, ds, fP, r;
     static int linea, noCond;
     static double pi = 3.141592;
     static Scanner scan = new Scanner(System.in);
@@ -52,7 +52,8 @@ public class LineasTransmision {
         frec = scan.nextDouble();
         System.out.println("\nDMG= " + dmgFormula()
                 + "\nDsb= " + dsbFormula()
-                + "\nL= " + lFormula());
+                + "\nL= " + lFormula()
+                + "\nCan= " + canFormula());
     }
 
     static void distanciaConductores(int d) {
@@ -91,14 +92,19 @@ public class LineasTransmision {
         return l;
     }
 
-    static void canFormula() {
+    static double canFormula() {
+        double numerador, denominador, res = 0;
+        r = (d / 2) / (1000);
         if (linea == 2) {
-
+            numerador = 0.0242;
+            denominador = log(dmgFormula() / sqrt((r) * (d)));
+            res = numerador / denominador;
         } else if (linea == 3) {
 
         } else if (linea == 4) {
 
         }
+        return res;
     }
     
     static double xlFormula() {
