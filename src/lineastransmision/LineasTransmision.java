@@ -104,7 +104,34 @@ public class LineasTransmision {
         }
         return res;
     }
-
+    
+    static double xlFormula() {
+        return 2*Math.PI*frec*lFormula();
+    }
+    
+    static double xcFormula() {
+        return 1/Math.PI*frec*canFormula();
+    }
+    
+    static double ycFormula() {
+        return Math.PI*frec*canFormula();
+    }
+    
+    // de la tabla R dividir entre 2 es el resultado de R -> rFormula()
+    
+    static double vrFormula() {
+        return v/Math.sqrt(3);
+    }
+    
+    static Imaginario irFormula() {
+        double angulo = -Math.acos(fP);
+        double ir = w/(Math.sqrt(3)*vrFormula()*fP);
+        double real = ir*Math.cos(angulo);
+        double imaginaria = ir*Math.sin(angulo);
+        Imaginario irComplejo = new Imaginario(real, imaginaria);
+        return irComplejo;
+    }
+    
     static void imprime() {
         for (int i = 0; i < 100; i++) {
             if (dec[i] != 0) {
@@ -320,4 +347,32 @@ public class LineasTransmision {
         System.out.println("9. Pelican\t\t19. Tern\t\t29. Lapwing");
         System.out.println("10. Flicker\t\t20. Rail\t\t30. Falcon");
     }
+    
+    public static class Imaginario {
+        
+        private double i;
+        private double r;
+        
+        public Imaginario(double r, double i) {
+            this.r = r;
+            this.i = i;
+        }
+
+        public double getI() {
+            return i;
+        }
+
+        public void setI(double i) {
+            this.i = i;
+        }
+
+        public double getR() {
+            return r;
+        }
+
+        public void setR(double r) {
+            this.r = r;
+        }
+    }
+    
 }
