@@ -1,7 +1,10 @@
 package lineastransmision;
 
+import static java.lang.Math.acos;
+import static java.lang.Math.cos;
 import static java.lang.Math.log;
 import static java.lang.Math.pow;
+import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import java.util.Scanner;
 
@@ -17,7 +20,7 @@ public class LineasTransmision {
     static double dec[] = new double[100];
     static double d, w, v, lL, frec, dTA, ds, fP, r, R;
     static int linea, noCond;
-    static double pi = 3.141592;
+    static double pi = Math.PI;
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -53,7 +56,15 @@ public class LineasTransmision {
         System.out.println("\nDMG= " + dmgFormula()
                 + "\nDsb= " + dsbFormula()
                 + "\nL= " + lFormula()
-                + "\nCan= " + canFormula());
+                + "\nCan= " + canFormula()
+                + "\nVs= " + vsFormula()
+                + "\nxl = " + xlFormula()
+                + "\nxc = " + xcFormula()
+                + "\nyc = " + ycFormula() // como putas pasa yc de 4.4401E-6 a 3.5076E-7
+                + "\nR = " + R // de donde sale  el pendejo 0.0227 si esta pendeja R = 0.0554
+                + "\nvr = " + vrFormula()
+                + "\nir = " + irFormula().getR() + " + " +  irFormula().getI() + "j"
+                + "\nz = " + zFormula().getR() + " + " +  zFormula().getI());
     }
 
     static void distanciaConductores(int d) {
@@ -102,34 +113,53 @@ public class LineasTransmision {
         } else if (linea == 4) {
             res = 1.09 * (pow(r * (d * d * d), 1.0 / 4.0));
         }
-        return res;
+        return res; //con el ejemplo no da esta madre: 0.0117779
     }
     
     static double xlFormula() {
-        return 2*Math.PI*frec*lFormula();
+        return 2*pi*frec*lFormula();
     }
     
     static double xcFormula() {
-        return 1/Math.PI*frec*canFormula();
+        return 1/(2*pi*frec*canFormula());
     }
     
     static double ycFormula() {
-        return Math.PI*frec*canFormula();
+        return 2*pi*frec*canFormula();
     }
     
     // de la tabla R dividir entre 2 es el resultado de R -> rFormula()
     
     static double vrFormula() {
-        return v/Math.sqrt(3);
+        return v/sqrt(3);
     }
     
     static Imaginario irFormula() {
-        double angulo = -Math.acos(fP);
-        double ir = w/(Math.sqrt(3)*vrFormula()*fP);
-        double real = ir*Math.cos(angulo);
-        double imaginaria = ir*Math.sin(angulo);
-        Imaginario irComplejo = new Imaginario(real, imaginaria);
-        return irComplejo;
+        double angulo = -acos(fP);
+        double ir = w/(sqrt(3)*v*fP);
+        double real = ir*cos(angulo);
+        double complejo = ir*sin(angulo);
+        return new Imaginario(real, complejo);
+    }
+    
+    static Imaginario zFormula() {
+        double real = R*lFormula();
+        double complejo = 2*pi*lFormula()*lFormula();
+        return new Imaginario(real, complejo);
+    }
+    
+    static String vsFormula() {
+        Imaginario ir = irFormula();
+        Imaginario z = zFormula();
+        //VS = VR + IR*Z
+        //VS = VR + [(IRr + IRj)(Zr + Zj)]
+        //VS = VR + [IRr*Zr + IRrZj + IRjZr + IRjZj] tal que j^2 = -1
+        //VS = (VR + IRr*Zr + IRj*Zj(-1))r + (IRrZj + IRjZr)j
+        double real = vrFormula() + ir.getR()*z.getR() + ir.getI()*z.getI()*(-1);
+        double complejo = ir.getR()*z.getI() + ir.getI()*z.getR();
+        double magnitud = Math.sqrt(real*real + complejo*complejo);
+        double angulo = Math.atan(complejo/real);
+        return "Vs = magnitud = " + magnitud + ", angulo = " + angulo + "";
     }
     
     static void imprime() {
