@@ -57,13 +57,14 @@ public class LineasTransmision {
                 + "\nDsb= " + dsbFormula()
                 + "\nL= " + lFormula()
                 + "\nCan= " + canFormula()
+                + "\nXl = " + xlFormula()
+                + "\nXc = " + xcFormula()
+                + "\nYc = " + ycFormula() // como putas pasa yc de 4.4401E-6 a 3.5076E-7
+                + "\nR = " + R / 2 // de donde sale  el pendejo 0.0227 si esta pendeja R = 0.0554 [Solo es entre 2]
+                + "\n\nSolucion por el metodo de L.T. Corta:"
                 + "\nVs= " + vsFormula()
-                + "\nxl = " + xlFormula()
-                + "\nxc = " + xcFormula()
-                + "\nyc = " + ycFormula() // como putas pasa yc de 4.4401E-6 a 3.5076E-7
-                + "\nR = " + R // de donde sale  el pendejo 0.0227 si esta pendeja R = 0.0554
-                + "\nvr = " + vrFormula()
-                + "\nir = " + irFormula().getR() + " + " +  irFormula().getI() + "j"
+                + "\nVr = " + vrFormula()
+                + "\nIr = " + irFormula().getR() + " + " + irFormula().getI() + "j"
                 + "\nz = " + zFormula().getR() + " + " +  zFormula().getI());
     }
 
@@ -113,7 +114,7 @@ public class LineasTransmision {
         } else if (linea == 4) {
             res = 1.09 * (pow(r * (d * d * d), 1.0 / 4.0));
         }
-        return res; //con el ejemplo no da esta madre: 0.0117779
+        return res; //con el ejemplo no da esta madre: 0.0117779 [ese chavo hizo mal sus operaciones o ya lo comprobaste]
     }
     
     static double xlFormula() {
@@ -161,6 +162,7 @@ public class LineasTransmision {
         double angulo = Math.atan(complejo/real);
         return "Vs = magnitud = " + magnitud + ", angulo = " + angulo + "";
     }
+
     
     static void imprime() {
         for (int i = 0; i < 100; i++) {
